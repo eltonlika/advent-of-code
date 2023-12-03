@@ -16,5 +16,12 @@ dependencies {
 }
 
 test {
+    outputs.upToDateWhen { false } // do not cache tests
     useJUnitPlatform()
+    testLogging {
+        showStandardStreams = true
+        exceptionFormat = 'full'
+        events = ["failed", "passed", "skipped", "standardError", "standardOut"]
+        info.events = ["failed", "passed", "skipped", "standardError", "standardOut"]
+    }
 }
