@@ -20,23 +20,23 @@ public class Day5Test {
     }
 
     @Test
-    public void part2_example() {
+    public void part2_example_unoptimized() {
         assertThat(new Day5().solvePart2(read("5/example1.txt"))).isEqualTo(46);
     }
 
     @Disabled("very slow, runs up to 7 minutes")
     @Test
-    public void part2_input() {
+    public void part2_input_unoptimized() {
         assertThat(new Day5().solvePart2(read("5/input.txt"))).isEqualTo(9622622);
     }
 
     @Test
-    public void part2_optimized_example() {
+    public void part2_example_optimized() {
         assertThat(new Day5().solvePart2Optimized(read("5/example1.txt"))).isEqualTo(46);
     }
 
     @Test
-    public void part2_optimized_input() {
+    public void part2_input_optimized() {
         assertThat(new Day5().solvePart2Optimized(read("5/input.txt"))).isEqualTo(9622622);
     }
 }

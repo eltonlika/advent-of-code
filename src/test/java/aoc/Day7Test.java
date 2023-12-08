@@ -10,7 +10,7 @@ public class Day7Test {
 
     @Test
     public void part1_example() {
-        assertThat(Day7.solvePart1(read("7/example.txt"))).isEqualTo(6440);
+        assertThat(Day7.solvePart1(read("7/example1.txt"))).isEqualTo(6440);
     }
 
     @Test
@@ -20,7 +20,7 @@ public class Day7Test {
 
     @Test
     public void part2_example() {
-        assertThat(Day7.solvePart2(read("7/example.txt"))).isEqualTo(5905);
+        assertThat(Day7.solvePart2(read("7/example1.txt"))).isEqualTo(5905);
     }
 
     @Test

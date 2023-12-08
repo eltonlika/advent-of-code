@@ -1,12 +1,11 @@
 package aoc;
 
-import java.util.Comparator;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import static java.util.stream.Collectors.*;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class Day7 {
 
