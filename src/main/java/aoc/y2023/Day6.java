@@ -1,38 +1,46 @@
-package aoc;
+package aoc.y2023;
 
-import java.util.Arrays;
+import static aoc.util.Util.parseNumbers;
 
-public class Day6 {
+import aoc.AoC;
 
-    public static long solvePart1(final String content) {
-        final String[] lines = content.split("\n");
-        final long[] times = parseNumbers(lines[0].split(":")[1]);
-        final long[] distances = parseNumbers(lines[1].split(":")[1]);
-        long product = 1;
-        for (int i = 0; i < times.length; i++) {
-            final long solutions = numberOfSolutions(times[i], distances[i]);
-            product *= solutions;
+public class Day6 implements AoC {
+
+    private long[] timesPart1;
+    private long[] distancesPart1;
+    private long[] timesPart2;
+    private long[] distancesPart2;
+
+    @Override
+    public void load(String input) {
+        final String[] lines = input.split("\n");
+        this.timesPart1 = parseNumbers(lines[0].split(":")[1], " ").toArray();
+        this.distancesPart1 = parseNumbers(lines[1].split(":")[1], " ").toArray();
+        this.timesPart2 =
+                parseNumbers(lines[0].split(":")[1].replaceAll("\\s+", ""), " ").toArray();
+        this.distancesPart2 =
+                parseNumbers(lines[1].split(":")[1].replaceAll("\\s+", ""), " ").toArray();
+    }
+
+    @Override
+    public long getPart1Solution() {
+        long product = 1L;
+        for (int i = 0; i < this.timesPart1.length; i++) {
+            product *= numberOfSolutions(this.timesPart1[i], this.distancesPart1[i]);
         }
         return product;
     }
 
-    public static long solvePart2(final String content) {
-        final String[] lines = content.split("\n");
-        final long[] times = parseNumbers(lines[0].split(":")[1].replaceAll("\\s+", ""));
-        final long[] distances = parseNumbers(lines[1].split(":")[1].replaceAll("\\s+", ""));
-        long product = 1;
-        for (int i = 0; i < times.length; i++) {
-            final long solutions = numberOfSolutions(times[i], distances[i]);
-            product *= solutions;
+    @Override
+    public long getPart2Solution() {
+        long product = 1L;
+        for (int i = 0; i < this.timesPart2.length; i++) {
+            product *= numberOfSolutions(this.timesPart2[i], this.distancesPart2[i]);
         }
         return product;
     }
 
-    static long[] parseNumbers(final String line) {
-        return Arrays.stream(line.trim().split("\\s+")).mapToLong(Long::parseLong).toArray();
-    }
-
-    static long numberOfSolutions(final long time, final long distance) {
+    private long numberOfSolutions(final long time, final long distance) {
         // Actually did the math here to find the formula for the solutions range.
         // The following relations must hold:
         // 1: Speed = Pressing time
