@@ -3,6 +3,7 @@ package aoc;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import aoc.y2023.Day1;
+import aoc.y2023.Day10;
 import aoc.y2023.Day2;
 import aoc.y2023.Day3;
 import aoc.y2023.Day4;
@@ -12,6 +13,7 @@ import aoc.y2023.Day7;
 import aoc.y2023.Day8;
 import aoc.y2023.Day9;
 
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 public class TestSolutions2023 {
@@ -120,5 +122,34 @@ public class TestSolutions2023 {
         assertThat(new Day9().withInputFile("2023/9_input.txt"))
                 .returns(1882395907L, AoC::getPart1Solution)
                 .returns(1005L, AoC::getPart2Solution);
+    }
+
+    @Nested
+    class TestDay10 {
+
+        @Test
+        public void test_example1() {
+            assertThat(new Day10().withInputFile("2023/10_example1.txt"))
+                    .returns(8L, AoC::getPart1Solution);
+        }
+
+        @Test
+        public void test_example2() {
+            assertThat(new Day10().withInputFile("2023/10_example2.txt"))
+                    .returns(8L, AoC::getPart2Solution);
+        }
+
+        @Test
+        public void test_example3() {
+            assertThat(new Day10().withInputFile("2023/10_example3.txt"))
+                    .returns(10L, AoC::getPart2Solution);
+        }
+
+        @Test
+        public void test_input() {
+            assertThat(new Day10().withInputFile("2023/10_input.txt"))
+                    .returns(6870L, AoC::getPart1Solution)
+                    .returns(287L, AoC::getPart2Solution);
+        }
     }
 }

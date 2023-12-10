@@ -14,7 +14,7 @@ public final class Util {
     private Util() {}
 
     public static String read(final String filename) {
-        final URL url = jdk.jshell.execution.Util.class.getClassLoader().getResource(filename);
+        final URL url = Util.class.getClassLoader().getResource(filename);
         final String absolutePath = Objects.requireNonNull(url).getPath();
         try {
             return Files.readString(Paths.get(absolutePath), UTF_8);

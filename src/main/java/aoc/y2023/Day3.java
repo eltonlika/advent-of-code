@@ -1,24 +1,12 @@
 package aoc.y2023;
 
 import aoc.AoC;
+import aoc.util.Position2D;
 
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.stream.LongStream;
 
 public class Day3 implements AoC {
-
-    private static final int[][] adjacentDirections =
-            new int[][] {
-                {-1, -1},
-                {0, -1},
-                {1, -1},
-                {-1, 0},
-                {1, 0},
-                {-1, 1},
-                {0, 1},
-                {1, 1}
-            };
 
     private char[][] chars;
 
@@ -29,71 +17,48 @@ public class Day3 implements AoC {
 
     @Override
     public long getPart1Solution() {
-        long sum = 0L;
         final boolean[][] collected = new boolean[this.chars.length][this.chars[0].length];
-
-        for (int yPos = 0; yPos < this.chars.length; yPos++) {
-            for (int xPos = 0; xPos < this.chars[yPos].length; xPos++) {
-                if (!isSymbol(this.chars[yPos][xPos])) {
-                    continue;
-                }
-                sum += getAdjacentNumbers(xPos, yPos, collected).sum();
-            }
-        }
-
-        return sum;
+        return Position2D.generate(this.chars)
+                .filter(pos -> isSymbol(pos.get(this.chars)))
+                .mapToLong(pos -> getAdjacentNumbers(pos, collected).sum())
+                .sum();
     }
 
     @Override
     public long getPart2Solution() {
-        long sum = 0L;
         final boolean[][] collected = new boolean[this.chars.length][this.chars[0].length];
-
-        for (int yPos = 0; yPos < this.chars.length; yPos++) {
-            for (int xPos = 0; xPos < this.chars[yPos].length; xPos++) {
-                if (this.chars[yPos][xPos] != '*') {
-                    continue;
-                }
-                final long[] adjacentNumbers = getAdjacentNumbers(xPos, yPos, collected).toArray();
-                if (adjacentNumbers.length != 2) {
-                    continue;
-                }
-                sum += adjacentNumbers[0] * adjacentNumbers[1];
-            }
-        }
-
-        return sum;
+        return Position2D.generate(this.chars)
+                .filter(pos -> pos.get(this.chars) == '*')
+                .map(pos -> getAdjacentNumbers(pos, collected).toArray())
+                .filter(arr -> arr.length == 2)
+                .mapToLong(arr -> arr[0] * arr[1])
+                .sum();
     }
 
-    private LongStream getAdjacentNumbers(
-            final int xPos, final int yPos, final boolean[][] collected) {
-        return Arrays.stream(adjacentDirections)
-                .map(dir -> findNumber(xPos + dir[0], yPos + dir[1], collected))
+    private LongStream getAdjacentNumbers(final Position2D pos, final boolean[][] collected) {
+        return pos.adjacent(this.chars)
+                .filter(adjacent -> !adjacent.get(collected))
+                .map(adjacent -> findNumber(adjacent, collected))
                 .filter(Objects::nonNull)
                 .mapToLong(Long::longValue);
     }
 
-    private Long findNumber(final int xPos, final int yPos, final boolean[][] collected) {
-        if (yPos < 0
-                || yPos >= this.chars.length
-                || xPos < 0
-                || xPos >= this.chars[yPos].length
-                || !Character.isDigit(this.chars[yPos][xPos])
-                || collected[yPos][xPos]) {
+    private Long findNumber(final Position2D pos, final boolean[][] collected) {
+        if (!Character.isDigit(pos.get(this.chars))) {
             return null;
         }
 
         // find start position of number
-        int idx = xPos;
-        while (idx - 1 >= 0 && Character.isDigit(this.chars[yPos][idx - 1])) {
+        int idx = pos.x();
+        while (idx - 1 >= 0 && Character.isDigit(this.chars[pos.y()][idx - 1])) {
             idx--;
         }
 
         // read complete number and mark all it's positions as collected
         long num = 0;
-        while (idx < this.chars[yPos].length && Character.isDigit(this.chars[yPos][idx])) {
-            num = (num * 10) + Character.getNumericValue(this.chars[yPos][idx]);
-            collected[yPos][idx] = true;
+        while (idx < this.chars[pos.y()].length && Character.isDigit(this.chars[pos.y()][idx])) {
+            num = (num * 10) + Character.getNumericValue(this.chars[pos.y()][idx]);
+            collected[pos.y()][idx] = true;
             idx++;
         }
         return num;
