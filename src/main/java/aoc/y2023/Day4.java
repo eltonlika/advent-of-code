@@ -32,7 +32,7 @@ public class Day4 implements AoC {
         final long[] cardCount = Arrays.stream(this.cards).mapToLong(c -> 1L).toArray();
         for (int i = 0; i < this.cards.length; i++) {
             sum += cardCount[i];
-            final long matches = this.cards[i].countMatches();
+            final int matches = this.cards[i].countMatches();
             for (int j = 1; j <= matches; j++) {
                 cardCount[i + j] += cardCount[i];
             }
@@ -51,8 +51,8 @@ public class Day4 implements AoC {
                     parseNumbers(pipeDelimited[1], " ").boxed().toList());
         }
 
-        long countMatches() {
-            return draw().stream().filter(winning()::contains).count();
+        int countMatches() {
+            return (int) draw().stream().filter(winning()::contains).count();
         }
     }
 }

@@ -1,3 +1,3 @@
-# Advent of Code 2023
+# Advent of Code
 
-[![test](https://github.com/eltonlika/advent-of-code-2023/actions/workflows/gradle.yml/badge.svg)](https://github.com/eltonlika/advent-of-code-2023/actions/workflows/gradle.yml)
+[![test](https://github.com/eltonlika/advent-of-code/actions/workflows/gradle.yml/badge.svg)](https://github.com/eltonlika/advent-of-code/actions/workflows/gradle.yml)
