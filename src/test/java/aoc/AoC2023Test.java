@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import aoc.y2023.Day1;
 import aoc.y2023.Day10;
 import aoc.y2023.Day11;
+import aoc.y2023.Day12;
 import aoc.y2023.Day2;
 import aoc.y2023.Day3;
 import aoc.y2023.Day4;
@@ -242,6 +243,24 @@ public class AoC2023Test {
             assertThat(new Day11().withInputFile("2023/11_input.txt"))
                     .returns(9647174L, AoC::getPart1Solution)
                     .returns(377318892554L, AoC::getPart2Solution);
+        }
+    }
+
+    @Nested
+    public class Day12Test {
+
+        @Test
+        public void example1() {
+            assertThat(new Day12().withInputFile("2023/12_example1.txt"))
+                    .returns(21L, AoC::getPart1Solution)
+                    .returns(525152L, AoC::getPart2Solution);
+        }
+
+        @Test
+        public void input() {
+            assertThat(new Day12().withInputFile("2023/12_input.txt"))
+                    .returns(7670L, AoC::getPart1Solution)
+                    .returns(157383940585037L, AoC::getPart2Solution);
         }
     }
 }
