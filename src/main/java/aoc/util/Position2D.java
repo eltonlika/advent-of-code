@@ -56,6 +56,15 @@ public record Position2D(int x, int y) {
         return new Position2D(x + 1, y + 1);
     }
 
+    public Position2D move(final Direction direction) {
+        return switch (direction) {
+            case up -> up();
+            case down -> down();
+            case left -> left();
+            case right -> right();
+        };
+    }
+
     public boolean inside(final int width, final int height) {
         return this.x() >= 0 && this.x() < width && this.y() >= 0 && this.y() < height;
     }

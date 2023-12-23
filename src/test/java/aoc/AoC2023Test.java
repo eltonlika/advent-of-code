@@ -9,6 +9,7 @@ import aoc.y2023.Day12;
 import aoc.y2023.Day13;
 import aoc.y2023.Day14;
 import aoc.y2023.Day15;
+import aoc.y2023.Day16;
 import aoc.y2023.Day2;
 import aoc.y2023.Day3;
 import aoc.y2023.Day4;
@@ -318,6 +319,24 @@ public class AoC2023Test {
             assertThat(new Day15().withInputFile("2023/15_input.txt"))
                     .returns(519603L, AoC::getPart1Solution)
                     .returns(244342L, AoC::getPart2Solution);
+        }
+    }
+
+    @Nested
+    public class Day16Test {
+
+        @Test
+        public void example1() {
+            assertThat(new Day16().withInputFile("2023/16_example1.txt"))
+                    .returns(46L, AoC::getPart1Solution)
+                    .returns(51L, AoC::getPart2Solution);
+        }
+
+        @Test
+        public void input() {
+            assertThat(new Day16().withInputFile("2023/16_input.txt"))
+                    .returns(8021L, AoC::getPart1Solution)
+                    .returns(8216L, AoC::getPart2Solution);
         }
     }
 }
