@@ -4,7 +4,11 @@ import java.util.Objects;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public record Position2D(int x, int y) {
+public record Position2D(int x, int y) implements Comparable<Position2D> {
+
+    public static Position2D of(int x, int y) {
+        return new Position2D(x, y);
+    }
 
     public static Stream<Position2D> generate(final int width, final int height) {
         return IntStream.range(0, height)
@@ -16,11 +20,27 @@ public record Position2D(int x, int y) {
         return generate(array2d[0].length, array2d.length);
     }
 
+    public static Stream<Position2D> generate(final int[][] array2d) {
+        return generate(array2d[0].length, array2d.length);
+    }
+
+    public <T> void set(final T[][] array2d, final T value) {
+        array2d[y][x] = value;
+    }
+
+    public int get(final int[][] array2d) {
+        return array2d[y][x];
+    }
+
     public char get(final char[][] array2d) {
         return array2d[y][x];
     }
 
     public boolean get(final boolean[][] array2d) {
+        return array2d[y][x];
+    }
+
+    public <T> T get(final T[][] array2d) {
         return array2d[y][x];
     }
 
@@ -69,6 +89,10 @@ public record Position2D(int x, int y) {
         return this.x() >= 0 && this.x() < width && this.y() >= 0 && this.y() < height;
     }
 
+    public double distance(final Position2D other) {
+        return Math.sqrt(Math.pow(other.x - this.x, 2) + Math.pow(other.y - this.y, 2));
+    }
+
     public Stream<Position2D> adjacent(final int width, final int height) {
         return Stream.of(
                         up(), down(), left(), right(), upLeft(), upRight(), downLeft(), downRight())
@@ -89,5 +113,13 @@ public record Position2D(int x, int y) {
     @Override
     public int hashCode() {
         return Objects.hash(x, y);
+    }
+
+    @Override
+    public int compareTo(Position2D o) {
+        if (this.y == o.y) {
+            return Integer.compare(this.x, o.x);
+        }
+        return Integer.compare(this.y, o.y);
     }
 }

@@ -42,4 +42,8 @@ public final class Util {
         }
         return gcd(b, a % b);
     }
+
+    public static long min(final long... nums) {
+        return Arrays.stream(nums).min().orElseThrow();
+    }
 }
