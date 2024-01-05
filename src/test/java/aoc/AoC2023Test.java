@@ -355,8 +355,7 @@ public class AoC2023Test {
         public void input() {
             assertThat(new Day17().withInputFile("2023/17_input.txt"))
                     .returns(694L, AoC::getPart1Solution)
-            //                    .returns(8216L, AoC::getPart2Solution)
-            ;
+                    .returns(829L, AoC::getPart2Solution);
         }
     }
 }
