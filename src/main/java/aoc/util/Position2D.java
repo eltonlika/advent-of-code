@@ -28,6 +28,10 @@ public record Position2D(int x, int y) implements Comparable<Position2D> {
         array2d[y][x] = value;
     }
 
+    public <T> void set(final char[][] array2d, final char value) {
+        array2d[y][x] = value;
+    }
+
     public int get(final int[][] array2d) {
         return array2d[y][x];
     }
